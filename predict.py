@@ -58,5 +58,5 @@ def crop_to_bbox(detection, image_rgb):
     cropped_image = image_rgb.crop((x1, y1, x2, y2))
     cropped_image.save('results/prediction.png') # Instead of saving, send back to backend in some form
 
-image_path = "data/notbird3.png" # Replace with image from backend
+image_path = "data/bird1.png" # Replace with image from backend
 results = detect_objects(image_path) # Run this to detect image
