@@ -11,8 +11,8 @@ Use pip3 instead of pip on some systems to be sure to install modules for python
 import ctypes as ct
 import random
 import os
-import cv2
-import numpy as np
+import cv2 #pip install opencv-python
+import numpy as np #pip install numpy
 
 
 class BOX(ct.Structure):

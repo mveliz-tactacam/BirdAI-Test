@@ -1,9 +1,10 @@
 import darknet
-from PIL import Image #// pip install pillow
+from PIL import Image  #// pip install pillow
 
 net = darknet.load_net(b"cfg/yolov4.cfg", b"feathersnap.weights", 0)
 meta = darknet.load_meta(b"cfg/coco.data")
 class_names = [meta.names[i].decode("ascii") for i in range(meta.classes)]
+
 
 def detect_objects(image_path):
     # Load image
@@ -25,9 +26,9 @@ def detect_objects(image_path):
     bird_detection = get_bird_detection(detections)
 
     if bird_detection[0] != None:
-      crop_to_bbox(bird_detection[0], image_rgb)
-      print("Bird detected with confidence: ", bird_detection[1])
-    
+        crop_to_bbox(bird_detection[0], image_rgb)
+        print("Bird detected with confidence: ", bird_detection[1])
+
     print("Bird detected: ", bird_detection[0] != None)
     return [bird_detection[0] != None, bird_detection[1]]
 
@@ -47,6 +48,7 @@ def get_bird_detection(detections):
     else:
         return [None, 0.0]
 
+
 def crop_to_bbox(detection, image_rgb):
     label, confidence, bbox = detection
     print(confidence)
@@ -56,7 +58,8 @@ def crop_to_bbox(detection, image_rgb):
     x2 = int(x + w / 2)
     y2 = int(y + h / 2)
     cropped_image = image_rgb.crop((x1, y1, x2, y2))
-    cropped_image.save('results/prediction.png') # Instead of saving, send back to backend in some form
+    cropped_image.save('results/prediction.png')  # Instead of saving, send back to backend in some form
 
-image_path = "data/bird1.png" # Replace with image from backend
-results = detect_objects(image_path) # Run this to detect image
+
+image_path = "data/bird_data/bird1.png"  # Replace with image from backend
+results = detect_objects(image_path)  # Run this to detect image
